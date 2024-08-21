@@ -9,9 +9,10 @@ export default async function gitMergeDevelop() {
 
     // 检查当前是否有未提交的更改
     const { stdout: status } = await execa('git', ['status', '--porcelain'])
+
     if (status) {
       window.showErrorMessage('合并失败：您有未提交的更改，请先提交或暂存更改。')
-      process.exit(1)
+      return process.exit(1)
     }
 
     // 切换到 develop 分支
