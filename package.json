@@ -1,8 +1,8 @@
 {
-  "publisher": "brokenbonesdd@gmail",
+  "publisher": "brokenbonesdd",
   "name": "vscode-merge-branch-button",
   "displayName": "vscode-merge-branch-button",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "pnpm@8.10.5",
   "description": "vscode button merge branch to develop",
   "author": "brokenbonesdd <brokenbonesdd@gmail.com>",
