@@ -9,7 +9,11 @@ export function setupMergeGitBranchButton(context: ExtensionContext) {
   mergeButton.command = 'extension.mergeGitBranch'
   mergeButton.show()
 
-  const disposable = commands.registerCommand('extension.mergeGitBranch', () => {
+  const disposable = commands.registerCommand('extension.mergeGitBranch', async () => {
+    // 禁用按钮并更改图标
+    mergeButton.text = '$(sync~spin) Merging...'
+    mergeButton.command = undefined // 移除命令使按钮不可点击
+
     const workspaceFolders = workspace.workspaceFolders
     if (workspaceFolders && workspaceFolders.length > 0) {
       const workspacePath = workspaceFolders[0].uri.fsPath
@@ -17,11 +21,21 @@ export function setupMergeGitBranchButton(context: ExtensionContext) {
     }
     else {
       window.showErrorMessage('No workspace folder found.')
+      // 恢复按钮状态
+      mergeButton.text = '$(git-merge) Merge'
+      mergeButton.command = 'extension.mergeGitBranch'
       return
     }
 
-    // 执行合并操作
-    gitMergeDevelop()
+    try {
+      // 执行合并操作
+      await gitMergeDevelop()
+    }
+    finally {
+      // 无论成功失败都恢复按钮状态
+      mergeButton.text = '$(git-merge) Merge'
+      mergeButton.command = 'extension.mergeGitBranch'
+    }
   })
 
   context.subscriptions.push(disposable)

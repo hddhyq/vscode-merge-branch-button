@@ -2,7 +2,7 @@
   "publisher": "brokenbonesdd",
   "name": "vscode-merge-branch-button",
   "displayName": "vscode-merge-branch-button",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "packageManager": "pnpm@8.10.5",
   "description": "vscode button merge branch to develop",
   "author": "brokenbonesdd <brokenbonesdd@gmail.com>",
@@ -48,7 +48,17 @@
         "command": "extension.mergeGitBranch",
         "title": "Merge Git Branch"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Git Merge Branch",
+      "properties": {
+        "gitMergeBranch.targetBranch": {
+          "type": "string",
+          "default": "develop",
+          "description": "目标合并分支名称"
+        }
+      }
+    }
   },
   "scripts": {
     "build": "tsup src/index.ts --external vscode",
